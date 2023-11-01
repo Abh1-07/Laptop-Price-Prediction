@@ -4,9 +4,10 @@ __pycache__/
 *$py.class
 
 # Directories
-.Data/
-*.Data/
-.Data
+notebooks/
+Artifacts/
+Data/
+git
 # C extensions
 *.so
 
