@@ -34,7 +34,7 @@ class Data_transformation:
             logging.info(f'Numerical Features: {num_features}')
             cat_pipe = Pipeline(
                 steps = [
-                    ('imputer',SimpleImputer(strategy='median')),
+                    ('imputer',SimpleImputer(strategy='most_frequent')),
                     ('ohe',OneHotEncoder(sparse=False,drop='first'))
                 ]
             )
