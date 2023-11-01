@@ -1,5 +1,5 @@
 import sys
-
+import os
 from src.logger import logging
 
 
@@ -23,12 +23,13 @@ class CustomException(Exception):
 
 # CHECKING PROGRAM
 
-"""
-if __name__ == '__main__':
 
+if __name__ == '__main__':
     try:
         a = 1 / 0
     except Exception as e:
         logging.info('Divide by Zero Error')  # initially won't log as the logger.py has to be called above as a package
         raise CustomException(e, sys)
-		"""
+
+    
+		
