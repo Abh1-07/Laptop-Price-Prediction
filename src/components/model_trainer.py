@@ -27,7 +27,7 @@ class Model_trainer:
 
     def initiate_model_trainer(self, train_array, test_array):
         try:
-            x_train,x_test,y_train,y_test = (
+            x_train,y_train,x_test,y_test = (
                 train_array[:,:-1],
                 train_array[:,-1],
                 test_array[:,:-1],
@@ -39,7 +39,7 @@ class Model_trainer:
                 'Decision Tree': DecisionTreeRegressor(),
                 'Random Forest Regressor': RandomForestRegressor(),
                 'XGBRegressor': XGBRegressor(),
-                "CatBoosting": CatBoostRegressor(verbose = False),
+                "Cat Boosting": CatBoostRegressor(),
                 'Ada Boosting': AdaBoostRegressor()
             }
 
