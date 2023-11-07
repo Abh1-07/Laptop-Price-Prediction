@@ -54,18 +54,18 @@ class Data_transformation:
     def initiate_data_transformation(self,train_path,test_path):
         try:
             train_df = pd.read_csv(train_path)
-            test_df = pd.read(test_path)
+            test_df = pd.read_csv(test_path)
             logging.info('Reading Train and Test data Completed')
             logging.info('Obtaining Preprocessing Object')
 
             preprocessing_obj = self.get_data_transformation_obj()
-            output_column = ['Price']
+            output_column = 'Price'
             cat_features = ['Company', 'TypeName', 'Gpu', 'Cpu Name', 'OS']
             num_features = ['Ram', 'Weight', 'Touchscreen', 'Ips', 'Ppi', 'HDD', 'SSD']
             #making df for as x_train, x_test, y_train, y_test
-            input_feature_train_df = train_df.drop(columns = [output_column],axis = 1)
+            input_feature_train_df = train_df.drop(columns = [output_column])
             output_feature_train_df = np.log(train_df[output_column])
-            input_feature_test_df = test_df.drop(columns=[output_column], axis=1)
+            input_feature_test_df = test_df.drop(columns=[output_column])
             output_feature_test_df = np.log(test_df[output_column])
 
             logging.info('Applying preprocessing object to training and testing DataFrame')
@@ -85,4 +85,5 @@ class Data_transformation:
                 self.data_trans_config.preprocessor_obj_path
             )
         except Exception as e:
-            raise CustomException
+            raise CustomException(e, sys)
+        
