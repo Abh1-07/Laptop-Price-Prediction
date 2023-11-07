@@ -16,7 +16,7 @@ def save_object(file_path, obj):
     except Exception as e:
         raise CustomException(e,sys)    
 
-def evalute_model(x_train,y_train,x_test,y_test,models):
+def evaluate_model(x_train, y_train, x_test, y_test, models):
     try:
         report = {}
         for i in range(len(models)):
@@ -24,11 +24,11 @@ def evalute_model(x_train,y_train,x_test,y_test,models):
             model.fit(x_train,y_train)
 
             y_predict_train = model.predict(x_train)
-            y_predict_test = model.predict(y_train)
+            y_predict_test = model.predict(x_test)
 
             model_train_r2sq = r2_score(y_train, y_predict_train)
             model_test_r2sq = r2_score(y_test, y_predict_test)
-            report[list(models.values())[i]] = model_test_r2sq
+            report[list(models.keys())[i]] = model_test_r2sq
         return report
 
     except Exception as e:

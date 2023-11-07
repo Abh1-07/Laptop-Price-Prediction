@@ -8,6 +8,7 @@ notebooks/
 Artifacts/
 Data/
 git
+catboost_info/
 # C extensions
 *.so
 
