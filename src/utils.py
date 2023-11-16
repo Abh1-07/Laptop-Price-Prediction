@@ -5,6 +5,7 @@ from src.logger import logging
 from src.exception import CustomException
 from sklearn.metrics import r2_score, mean_absolute_error, mean_squared_error
 import numpy as np
+
 def save_object(file_path, obj):
     try:
         dir_path = os.path.dirname(file_path)
@@ -31,5 +32,12 @@ def evaluate_model(x_train, y_train, x_test, y_test, models):
             report[list(models.keys())[i]] = model_test_r2sq
         return report
 
+    except Exception as e:
+        raise CustomException(e, sys)
+    
+def load_object(filepath):
+    try:
+        with open(filepath, 'rb') as file_obj:
+            return dill.load(file_obj)
     except Exception as e:
         raise CustomException(e, sys)
