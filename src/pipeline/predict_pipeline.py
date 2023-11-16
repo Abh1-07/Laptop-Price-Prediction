@@ -11,8 +11,8 @@ class PredictionPipeline:
         pass
     def predict(self,features):
         try:
-            model_path = "Artifacts/model.pkl"
-            preprocessor_path = "Artifacts/preprocessor.pkl"
+            model_path = "Artifacts\model.pkl"
+            preprocessor_path = "Artifacts\preprocessor.pkl"
             loaded_model = load_object(filepath=model_path)
             loaded_preprocessor = load_object(filepath=preprocessor_path)
             scaled_data = loaded_preprocessor.transform(features)
@@ -22,17 +22,16 @@ class PredictionPipeline:
             raise CustomException(e, sys)
 
 class CustomData:
-    def __init__(self,Company, TypeName,Ram,Gpu,Weight,Price,Touchscreen,Ips,x_resolution,y_resolution,inches, CpuName, HDD, SSD, OS):
+    def __init__(self,Company, TypeName,Ram,Gpu,Weight,Touchscreen,Ips,x_res,y_res,inches, CpuName, HDD, SSD, OS):
         self.Company = Company
         self.TypeName = TypeName
         self.Ram = Ram
         self.Gpu = Gpu
         self.Weight = Weight
-        self.Price = Price
         self.Touchscreen = Touchscreen
         self.Ips = Ips
-        self.x_res = x_resolution
-        self.y_res = y_resolution
+        self.x_res = x_res
+        self.y_res = y_res
         self.inches = inches
         self.CpuName = CpuName
         self.HDD = HDD
@@ -42,19 +41,20 @@ class CustomData:
     def get_data_as_dataframe(self):
         try:
             custom_df =  {
-                'Company' : self.Company,
-                'TypeName' : self.TypeName,
-                'Ram' : self.Ram,
-                'Gpu': self.Gpu,
-                'Weight' : self.Weight,
-                'Touchscreen' : self.Touchscreen,
-                'Ips' : self.Ips,
-                'Ppi' : (self.x_res * self.y_res) / (self.inches),
-                'Cpu Name' : self.CpuName,
-                'HDD' : self.HDD,
-                'SSD' : self.SSD,
-                'OS' : self.OS
+                'Company' : [self.Company],
+                'TypeName' : [self.TypeName],
+                'Ram' : [int(self.Ram)],
+                'Gpu': [self.Gpu],
+                'Weight' : [float(self.Weight)],
+                'Touchscreen' : [int(self.Touchscreen)],
+                'Ips' : [int(self.Ips)],
+                'Ppi' : [(int(self.x_res) * int(self.y_res)) / float(self.inches)],
+                'Cpu Name' : [self.CpuName],
+                'HDD' : [int(self.HDD)],
+                'SSD' : [int(self.SSD)],
+                'OS' : [self.OS]
             }
+            print(custom_df)
             return pd.DataFrame(custom_df)
         except Exception as e:
             raise CustomException(e, sys)
